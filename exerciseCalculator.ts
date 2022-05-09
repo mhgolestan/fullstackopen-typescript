@@ -15,25 +15,26 @@ interface parsedValues {
 
 
 const exerciseParseArguments = (args: Array<string>): parsedValues => {
-  if (args.length < 4) throw new Error('Not enough arguments');
-  if (args.length > 12) throw new Error('Too many arguments');
+    if (args.length < 4) throw new Error('Not enough arguments');
+    if (args.length > 12) throw new Error('Too many arguments');
 
-  if (!isNaN(Number(args[2])) && !isNaN(Number(args[3]))) {
-    return {
-      targetValue: Number(args[2]),
-      inputValues: args.slice(3).map(x => Number(x))
+    if (!isNaN(Number(args[2])) && !isNaN(Number(args[3]))) {
+        return {
+            targetValue: Number(args[2]),
+            inputValues: args.slice(3).map(x => Number(x))
+        };
+    } else {
+        throw new Error('Provided values were not numbers!');
     }
-  } else {
-    throw new Error('Provided values were not numbers!');
-  }
-}
+};
 
-const calculateExercises = (inputValues:Array<number>, targetAmount: number): ExerciseResult  =>{
+export const calculateExercises = (inputValues: Array<number>, targetAmount: number): ExerciseResult => {
     const trainingDays: number = inputValues.filter(x => x !== 0).length;
-    const average:number = inputValues.reduce((partialSum, a) => partialSum + a, 0) / inputValues.length;
+    const average: number = inputValues.reduce((partialSum, a) => partialSum + a, 0) / inputValues.length;
+    // eslint-disable-next-line no-constant-condition
     const success: boolean = true ? average > targetAmount : false;
-    
-    let rating : number;
+
+    let rating: number;
     let ratingDescription: string;
     if (average > targetAmount) {
         rating = 3;
@@ -46,27 +47,26 @@ const calculateExercises = (inputValues:Array<number>, targetAmount: number): Ex
         ratingDescription = "bad";
     }
 
-    const result : ExerciseResult = {
+    const result: ExerciseResult = {
         periodLength: inputValues.length,
-        trainingDays : trainingDays,
-        average : average,
-        target : targetAmount,
-        success : success,
-        rating : rating,
-        ratingDescription : ratingDescription
-    }
+        trainingDays: trainingDays,
+        average: average,
+        target: targetAmount,
+        success: success,
+        rating: rating,
+        ratingDescription: ratingDescription
+    };
     return result;
-}
+};
 
 
 try {
-    const {targetValue, inputValues} = exerciseParseArguments(process.argv);
+    const { targetValue, inputValues } = exerciseParseArguments(process.argv);
     console.log(calculateExercises(inputValues, targetValue));
 } catch (error: unknown) {
-    let errorMessage = 'Something went wrong.'
+    let errorMessage = 'Something went wrong.';
     if (error instanceof Error) {
         errorMessage += ' Error: ' + error.message;
     }
     console.log(errorMessage);
-    
 }
