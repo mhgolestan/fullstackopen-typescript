@@ -3,6 +3,7 @@ interface bmiValues  {
     weight: number;
 }
 
+let bmiMessage: string;
 
 const bmiParseArguments = (args: Array<string>): bmiValues => {
   if (args.length < 4) throw new Error('Not enough arguments');
@@ -18,23 +19,40 @@ const bmiParseArguments = (args: Array<string>): bmiValues => {
   }
 }
 
-const calculateBmi = (height: number, weight: number) =>{
+export const calculateBmi = (height: number, weight: number) : string =>{
     const bmiValue =  weight / (height * height * 0.0001);
+
     if (bmiValue <= 16.0) {
-      console.log("Underweight (Severe thinness)");
+      bmiMessage = "Underweight (Severe thinness)";
+      // return("Underweight (Severe thinness)")
+      // console.log("Underweight (Severe thinness)");
     }else if (bmiValue < 16.9 && bmiValue > 16.0) {
-      console.log("Underweight (Moderate thinness)");
+      bmiMessage = "Underweight (Moderate thinness)";
+      // return("Underweight (Moderate thinness)")
+      // console.log("Underweight (Moderate thinness)");
     }else if (bmiValue < 18.4 && bmiValue > 17.0) {
-      console.log("Underweight (Mild thinness)");
+      bmiMessage = "Underweight (Mild thinness)";
+      // return("Underweight (Mild thinness)")
+      // console.log("Underweight (Mild thinness)");
     }else if (bmiValue < 24.9 && bmiValue > 18.5) {
-      console.log("Normal range");
+      bmiMessage = "Normal range";
+      // return("Normal range")
+      // console.log("Normal range");
     } else if (bmiValue < 29.9 && bmiValue > 25.0) {
-      console.log("Overweight (Pre-obese)");
+      bmiMessage = "Overweight (Pre-obese)";
+      // return("Overweight (Pre-obese)")
+      // console.log("Overweight (Pre-obese)");
     } else if (bmiValue < 35.0 && bmiValue > 39.9) {
-      console.log("Obese (Class II)	");
+      bmiMessage = "Obese (Class II)";
+      // return("Obese (Class II)")
+      // console.log("Obese (Class II)");
     } else if (bmiValue > 40.0) {
-      console.log("Overweight (Pre-obese)	");
+      bmiMessage = "Overweight (Pre-obese)";
+      // return("Overweight (Pre-obese)")
+      // console.log("Overweight (Pre-obese)");
     }
+
+    return bmiMessage;
 }
 
 try {
