@@ -1,1 +1,4 @@
-node_modules/
+part-b/node_modules/
+part-c/node_modules/
+patientor-backend/node_modules/
+patientor/node_modules/
